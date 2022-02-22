@@ -31,6 +31,7 @@ class WeightedGraph {
         const previous = {};
         let path = [] //to return at end
         let smallest;
+
         //build up initial state
         for(let vertex in this.adjacencyList){
             if(vertex === start){
@@ -42,6 +43,7 @@ class WeightedGraph {
             }
             previous[vertex] = null;
         }
+
         // as long as there is something to visit
         while(nodes.values.length){
             smallest = nodes.dequeue().val;
@@ -76,7 +78,7 @@ class WeightedGraph {
     }
 }
 
-let graph = new WeightedGraph()
+const graph = new WeightedGraph()
 graph.addVertex("A");
 graph.addVertex("B");
 graph.addVertex("C");
