@@ -43,7 +43,7 @@ function factorialHelperFunction(numb){
     return result;
 }
 
-const numbToTest = 5;
+const numbToTest = 10;
 
 console.log(`Recursive => ${factorial(numbToTest)}`)
 
