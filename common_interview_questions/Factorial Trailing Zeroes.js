@@ -7,19 +7,16 @@
 // We continue until 5^x is greater than n.
 
 const trailingZeroes = (n) => {
-
     let numZeroes = 0;
-    for (let i = 5; i <= n; i *= 5) {
-        console.log(`i => ${i}`)
-        console.log(`Math.floor(n / i) => n => ${n}, i => ${i}, ${Math.floor(n / i)}`)
-        numZeroes += Math.floor(n / i);
-        console.log(`numZeroes => ${numZeroes}`)
+    while (n >= 5) {
+        numZeroes += Math.floor(n / 5);
+        n = Math.floor(n / 5);
     }
     return numZeroes;
 };
 
 
-console.log(trailingZeroes(0))
+console.log(trailingZeroes(25))
 
 
 
