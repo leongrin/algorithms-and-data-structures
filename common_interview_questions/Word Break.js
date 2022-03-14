@@ -21,11 +21,12 @@ const wordBreak = (s, wordDict) => {
     }
     return dp[s.length];
 
-    /*return verifyBreak(s, wordDict, 0, '', {});*/
+    /*const set = new Set(wordDict);
+    return verifyBreak(s, set, 0, {});*/
 };
 
 // recursive function
-function verifyBreak(s, wordDic, start, guess, memo) {
+function verifyBreak(s, set, start, memo) {
     if (start === s.length) return true;  // Base Case: it passed the end of the word, and no match was found.
 
     if (memo[start]) return memo[start];
@@ -34,13 +35,12 @@ function verifyBreak(s, wordDic, start, guess, memo) {
         // one index beyond the last index of the substring.
         let wildGuess = s.substring(start, end);
 
-        if (wordDic.includes(wildGuess) && verifyBreak(s, wordDic, end, wildGuess, memo)) {
+        if (set.has(wildGuess) && verifyBreak(s, set, end, memo)) {
             return memo[start] = true;
         }
     }
 
     return memo[start] = false;
-
 }
 
 
