@@ -18,27 +18,6 @@ const lengthOfLongestSubstring = (s) => {
     }
 
     return maxCount;
-
-
-    /*let uniqueCharacters = {};
-    let recordCount = 0
-    let count = 0;
-    let start = 0;
-
-    for (let i = start; i < s.length; i++) {
-        if (!uniqueCharacters[s[i]]) {
-            uniqueCharacters[s[i]] = true;
-            count++;
-            recordCount = Math.max(recordCount, count);
-        } else {
-            count = 0;
-            uniqueCharacters = {};
-            start++;
-            i = start - 1;
-        }
-    }
-
-    return recordCount;*/
 };
 
 

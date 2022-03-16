@@ -18,17 +18,14 @@ const isValid = (s) => {
     for (let char of s) {
         if (bracket[char]) {
             stack.push(bracket[char]);
-            console.log(stack)
-        } else {
-            if (stack.pop() !== char) return false;
-        }
+        } else if (stack.pop() !== char) return false;
     }
 
     return (!stack.length)
 };
 
 
-console.log(isValid("[(])"));
+console.log(isValid("[{}]"));
 
 
 
