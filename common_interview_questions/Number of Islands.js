@@ -5,27 +5,10 @@
 
 const numIslands = (grid) => {
     if (!grid.length) return 0;
-
-    let numIslands = 0;
-
-    for (let i = 0; i < grid.length; i++) {
-        for (let j = 0; j < grid[i].length; j++) {
-            if (grid[i][j] === '1') {
-                numIslands += turnOneToZerosAndAddIslands(grid, i, j);
-            }
-        }
-    }
+    let totalIslands = 0;
 
     function turnOneToZerosAndAddIslands(grid, i, j) {
-        if (
-            i < 0 ||
-            j < 0 ||
-            i >= grid.length ||
-            j >= grid[i].length ||
-            grid[i][j] === '0'
-        ) {
-            return 0
-        }
+        if (i < 0 || j < 0 || i > grid.length - 1 || j > grid[i].length - 1 || grid[i][j] === '0') return 0;
 
         grid[i][j] = '0';
 
@@ -37,7 +20,15 @@ const numIslands = (grid) => {
         return 1;
     }
 
-    return numIslands;
+    for (let i = 0; i < grid.length; i++) {
+        for (let j = 0; j < grid[i].length; j++) {
+            if (grid[i][j] === '1') {
+                totalIslands += turnOneToZerosAndAddIslands(grid, i, j);
+            }
+        }
+    }
+
+    return totalIslands;
 };
 
 
@@ -80,5 +71,43 @@ console.log(numIslands(grid2))
 //   ["0","0","0","1","1"]
 // ]
 // Output: 3
+
+
+
+
+/*if (!grid.length) return 0;
+
+let numIslands = 0;
+
+for (let i = 0; i < grid.length; i++) {
+    for (let j = 0; j < grid[i].length; j++) {
+        if (grid[i][j] === '1') {
+            numIslands += turnOneToZerosAndAddIslands(grid, i, j);
+        }
+    }
+}
+
+function turnOneToZerosAndAddIslands(grid, i, j) {
+    if (
+        i < 0 ||
+        j < 0 ||
+        i >= grid.length ||
+        j >= grid[i].length ||
+        grid[i][j] === '0'
+    ) {
+        return 0
+    }
+
+    grid[i][j] = '0';
+
+    turnOneToZerosAndAddIslands(grid, i - 1, j);
+    turnOneToZerosAndAddIslands(grid, i + 1, j);
+    turnOneToZerosAndAddIslands(grid, i, j - 1);
+    turnOneToZerosAndAddIslands(grid, i, j + 1);
+
+    return 1;
+}
+
+return numIslands;*/
 
 

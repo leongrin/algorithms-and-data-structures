@@ -6,22 +6,23 @@
 // Open brackets must be closed in the correct order.
 
 const isValid = (s) => {
-
-    let bracket = {
-        '(': ')',
+    let brackets = {
         '[': ']',
-        '{': '}'
+        '{': '}',
+        '(': ')'
     };
 
     let stack = [];
 
-    for (let char of s) {
-        if (bracket[char]) {
-            stack.push(bracket[char]);
-        } else if (stack.pop() !== char) return false;
+    for (let i = 0; i < s.length; i++) {
+        if (brackets[s[i]]) {
+            stack.push(brackets[s[i]])
+        } else if (s[i] !== stack.pop()) {
+            return false;
+        }
     }
 
-    return (!stack.length)
+    return  !stack.length;
 };
 
 
@@ -43,4 +44,18 @@ console.log(isValid("[{}]"));
 // Output: false
 
 
+/*let bracket = {
+    '(': ')',
+    '[': ']',
+    '{': '}'
+};
 
+let stack = [];
+
+for (let char of s) {
+    if (bracket[char]) {
+        stack.push(bracket[char]);
+    } else if (stack.pop() !== char) return false;
+}
+
+return (!stack.length)*/
