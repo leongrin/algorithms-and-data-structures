@@ -20,11 +20,11 @@ class Stack {
         return this.storage[this.size - 1];
     }
 
-    getSize() {
-        return this.size;
+    getSize() {   // check if it is empty
+        return this.size === 0;
     }
 
     empty() {
-        return this.getSize() === 0;
+        this.size = 0;
     }
 }

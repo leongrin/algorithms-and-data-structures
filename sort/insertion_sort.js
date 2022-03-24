@@ -1,5 +1,7 @@
 // Very fast for almost sorted lists
 
+// https://www.udemy.com/course/js-algorithms-and-data-structures-masterclass/learn/lecture/8344158#overview
+
 const numbers = [99, 44, 6, 2, 1, 5, 63, 87, 283, 4, 0];
 
 function insertionSort(arr) {

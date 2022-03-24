@@ -1,30 +1,30 @@
 
+const trap = (height) => {
+    if (!height.length || height.length < 3) return 0;
 
-const findMin = (nums) => {
-    let left = 0;
-    let right = nums.length - 1;
+    let maxRight = [];
+    let maxLeft = [];
+    let toRightTop = 0;
+    let toLeftTop = 0;
+    let waterCount = 0;
 
-    while (right > left) {
-        let mid = Math.floor((left + right) / 2);
-        console.log(`mid => ${mid}`);
-        console.log(`mid number nums[mid] => ${nums[mid]}`)
-        if (nums[mid] > nums[right]) {
-            console.log(`Yes, nums[mid] > nums[right] => ${nums[mid]} > ${nums[right]}`);
-            left = mid + 1
-        }
-        else {
-            console.log(`No, nums[mid] is NOT > nums[right] => ${nums[mid]} is NOT > ${nums[right]}`);
-            right = mid
-        }
-        console.log(`Now, left => ${left} and right => ${right}`);
+    for (let i = 0; i <height.length; i++) {
+        if (height[i] > toRightTop) toRightTop = height[i];
+        maxRight.push(toRightTop);
     }
 
-    return nums[left];
+    for (let i = height.length - 1; i >= 0; i--) {
+        if (height[i] > toLeftTop) toLeftTop = height[i];
+        maxLeft.unshift(toLeftTop);
+    }
+
+    for (let i = 0; i < height.length; i++) {
+        waterCount += Math.min(maxLeft[i], maxRight[i]) - height[i];
+    }
+
+    return waterCount;
+
 };
 
 
-console.log(findMin([4, 5, 6, 0, 1, 2, 3, 4, 5]));
-
-
-
-
+console.log(trap([0,1,0,2,1,0,1,3,2,1,2,1]));
