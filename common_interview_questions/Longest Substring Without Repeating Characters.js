@@ -1,4 +1,5 @@
 // Given a string s, find the length of the longest substring without repeating characters.
+// https://www.youtube.com/watch?v=WKTgajDkVcA&t=42s
 
 const lengthOfLongestSubstring = (s) => {
     let set = new Set();

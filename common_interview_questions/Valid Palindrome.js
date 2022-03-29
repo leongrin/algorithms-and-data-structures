@@ -4,13 +4,39 @@
 // Given a string s, return true if it is a palindrome, or false otherwise.
 
 const isPalindrome = (s) => {
-    const modStr = s.replace(/[^A-Za-z0-9]/g, '').toLowerCase();
-    const reversed = modStr.split('').reverse().join('');
-    return modStr === reversed;
+    s = s.replace(/[^A-Za-z0-9]/g, '').toLowerCase();
+    let start = 0;
+    let end = s.length - 1;
+
+    function trySubString(str) {
+        let startIn = 0;
+        let endIn = str.length - 1;
+        while (startIn < endIn) {
+            if (str[startIn] !== str[endIn]) return false;
+            startIn++;
+            endIn--;
+        }
+        return true;
+    }
+
+    while (start < end) {
+        if (s[start] !== s[end]) {
+            let stringStartPlus = s.slice(start + 1, end + 1);
+            let stringEndMinus = s.slice(start, end);
+            console.log(`stringStartPlus => ${stringStartPlus}`);
+            console.log(`stringEndMinus => ${stringEndMinus}`);
+            if (!trySubString(!stringStartPlus) && !trySubString(stringEndMinus)) return false;
+            break;
+        }
+        start++;
+        end--;
+    }
+
+    return true;
 };
 
 
-console.log(isPalindrome("A man, a plan, a canal: Panama"));
+console.log(isPalindrome("abccdba"));
 
 
 

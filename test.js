@@ -1,30 +1,24 @@
 
-const trap = (height) => {
-    if (!height.length || height.length < 3) return 0;
+const isValid = (s) => {
+    let brackets = {
+        '(':  ')',
+        '{': '}',
+        '[': ']'
+    };
+    let stack = [];
 
-    let maxRight = [];
-    let maxLeft = [];
-    let toRightTop = 0;
-    let toLeftTop = 0;
-    let waterCount = 0;
-
-    for (let i = 0; i <height.length; i++) {
-        if (height[i] > toRightTop) toRightTop = height[i];
-        maxRight.push(toRightTop);
+    for (let item of s) {
+        if (brackets[item]) {
+            stack.push(brackets[item])
+        } else {
+            if (item !== stack.pop()) return false;
+        }
     }
 
-    for (let i = height.length - 1; i >= 0; i--) {
-        if (height[i] > toLeftTop) toLeftTop = height[i];
-        maxLeft.unshift(toLeftTop);
-    }
-
-    for (let i = 0; i < height.length; i++) {
-        waterCount += Math.min(maxLeft[i], maxRight[i]) - height[i];
-    }
-
-    return waterCount;
-
+    return !stack.length;
 };
 
 
-console.log(trap([0,1,0,2,1,0,1,3,2,1,2,1]));
+console.log(isValid("()"))
+
+

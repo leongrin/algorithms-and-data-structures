@@ -32,9 +32,10 @@ function merge(leftArray, rightArray){
     return result.concat(leftArray.slice(i)).concat(rightArray.slice(j));
 }
 
+console.log(mergeSort([3,2,3,1,2,4,5,5,6]))
 
-const answer = mergeSort(numbers);
-console.log(answer);
+/*const answer = mergeSort(numbers);
+console.log(answer);*/
 
 
 
