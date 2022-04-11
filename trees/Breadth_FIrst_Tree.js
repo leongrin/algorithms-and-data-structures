@@ -80,6 +80,17 @@ class BinarySearchTree {
 
         return data;
     }
+
+    DFSPreOrder() {
+        let data = [];
+        function getData(node) {
+            data.push(node.value);
+            if (node.left) getData(node.left);
+            if (node.right) getData(node.right);
+        }
+        getData(this.root);
+        return data;
+    }
 }
 
 
@@ -91,5 +102,6 @@ tree.insert(3);
 tree.insert(8);
 tree.insert(20);
 console.log(tree.BFS())
+console.log()
     
 
