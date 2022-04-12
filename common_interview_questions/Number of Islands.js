@@ -6,22 +6,22 @@
 const numIslands = (grid) => {
     let total = 0;
 
-    const turnOneToZerosAndAddIslands = (grid, i, j) => {
+    const turnOneToZerosAndAddIslands = (i, j) => {
         if (i < 0 || j < 0 || i >= grid.length || j >= grid[i].length || grid[i][j] === '0') return;
 
         grid[i][j] = '0';
 
-        turnOneToZerosAndAddIslands(grid, i, j - 1);
-        turnOneToZerosAndAddIslands(grid, i -1, j);
-        turnOneToZerosAndAddIslands(grid, i, j + 1);
-        turnOneToZerosAndAddIslands(grid, i + 1, j);
+        turnOneToZerosAndAddIslands(i, j - 1);
+        turnOneToZerosAndAddIslands(i -1, j);
+        turnOneToZerosAndAddIslands(i, j + 1);
+        turnOneToZerosAndAddIslands(i + 1, j);
 
         return 1;
     };
 
     for (let i = 0; i < grid.length; i++) {
         for (let j = 0; j < grid[i].length; j++) {
-            if (grid[i][j] === '1') total += turnOneToZerosAndAddIslands(grid, i, j);
+            if (grid[i][j] === '1') total += turnOneToZerosAndAddIslands(i, j);
         }
     }
 
