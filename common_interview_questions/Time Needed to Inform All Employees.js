@@ -13,11 +13,45 @@
 // Return the number of minutes needed to inform all the employees about the urgent news.
 
 const numOfMinutes = (n, headID, manager, informTime) => {
+    const queue = [headID];
+    let layer = queue.length;
+    let maxMinLayer = 0;
+    let totalMinutes = 0;
+    let layerIndexes = new Set();
 
+    while(queue.length) {
+        let curr = queue.shift();
+        maxMinLayer = Math.max(maxMinLayer, informTime[curr]);
+        layer--;
+        layerIndexes.add(curr);
+        console.log(`checking curr => ${curr} on layer => ${layer}, for maxMinLayer => ${maxMinLayer}`);
+        if (layer === 0) {
+            totalMinutes += maxMinLayer;
+            maxMinLayer = 0;
+            for (let i = 0; i < manager.length; i++) {
+                if (layerIndexes.has(manager[i])) queue.push(i);
+            }
+            layerIndexes = new Set([]);
+            layer = queue.length;
+        }
+
+    }
+
+    return totalMinutes;
 };
 
 
-const n = 1, headID = 0, manager = [-1], informTime = [0];
+/*const n = 1, headID = 0, manager = [-1], informTime = [0]; */// expected 0
+
+/*const n = 6, headID = 2, manager = [2,2,-1,2,2,2], informTime = [0,0,1,0,0,0];*/ // expected 1
+
+/*const n = 7, headID = 6, manager = [1,2,3,4,5,6,-1], informTime = [0,6,5,4,3,2,1];*/ // expected 21
+
+/*const n = 10, headID = 3, manager = [8,9,8,-1,7,1,2,0,3,0], informTime = [224,943,160,909,0,0,0,643,867,722];*/ // expected 3665
+
+const n = 11, headID = 4, manager = [5,9,6,10,-1,8,9,1,9,3,4], informTime = [0,213,0,253,686,170,975,0,261,309,337];  // expected 2560
+
+
 console.log(numOfMinutes(n, headID, manager, informTime));
 
 
