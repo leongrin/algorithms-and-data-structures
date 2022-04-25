@@ -15,7 +15,7 @@ class PriorityQueue {
             let parentIndex = Math.floor((index -1) / 2);
             if (this.values[index].priority < this.values[parentIndex].priority) {
                 [this.values[parentIndex], this.values[index]] = [this.values[index], this.values[parentIndex]];
-            } else if (this.values[index].priority >= this.values[parentIndex].priority) break
+            } else break;
             index = parentIndex;
         }
 

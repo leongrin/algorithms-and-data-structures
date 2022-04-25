@@ -65,8 +65,7 @@ class BinarySearchTree {
     }
 
     BfsPerLevel() {
-        let visited = [],
-            queue = [this.root];
+        let visited = [], queue = [this.root];
 
         while (queue.length) {
             let row = [];

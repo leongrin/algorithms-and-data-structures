@@ -12,32 +12,27 @@
 //
 // Return the number of minutes needed to inform all the employees about the urgent news.
 
-const numOfMinutes = (n, headID, manager, informTime) => {
-    const queue = [headID];
-    let layer = queue.length;
-    let maxMinLayer = 0;
-    let totalMinutes = 0;
-    let layerIndexes = new Set();
+const numOfMinutes = (n, headID, managers, informTime) => {
 
-    while(queue.length) {
-        let curr = queue.shift();
-        maxMinLayer = Math.max(maxMinLayer, informTime[curr]);
-        layer--;
-        layerIndexes.add(curr);
-        console.log(`checking curr => ${curr} on layer => ${layer}, for maxMinLayer => ${maxMinLayer}`);
-        if (layer === 0) {
-            totalMinutes += maxMinLayer;
-            maxMinLayer = 0;
-            for (let i = 0; i < manager.length; i++) {
-                if (layerIndexes.has(manager[i])) queue.push(i);
-            }
-            layerIndexes = new Set([]);
-            layer = queue.length;
-        }
+    const adjList = managers.map(() => []); // building an empty multidimensional empty array
 
+    // The manager is the index of the adjList, and its corresponding list has its subordinates. We are building this.
+    for(let i = 0; i < n; i++) {
+        if(managers[i] !== -1) adjList[managers[i]].push(i);
     }
 
-    return totalMinutes;
+    // DFS
+    function traverse(node) {
+        let maxTime = 0;
+
+        for(let subordinate of adjList[node]) {
+            maxTime = Math.max(maxTime, traverse(subordinate));
+        }
+
+        return maxTime + informTime[node];
+    }
+    
+    return traverse(headID);
 };
 
 
@@ -53,7 +48,44 @@ const n = 11, headID = 4, manager = [5,9,6,10,-1,8,9,1,9,3,4], informTime = [0,2
 
 
 console.log(numOfMinutes(n, headID, manager, informTime));
+// -1 (idx 4) => 686
+// 4 (idx 10) => 337
+// 10 (idx 3) => 253
+// 3 (idx 9) => 309
+// 9 (idx 1, 6, 8) => 213, 975, 261
+// 1, 6, 8 (idx 7, 2, 5) => 0, 0, 170
+// 7, 2, 5 (idx 0) => 0
+// 0 end
 
+
+
+
+/*const queue = [headID];
+    let layer = queue.length;
+    let maxMinLayer = 0;
+    let totalMinutes = 0;
+    let layerIndexes = new Set();
+
+    while(queue.length) {
+        let curr = queue.shift();
+        maxMinLayer = Math.max(maxMinLayer, informTime[curr]);
+        layer--;
+        layerIndexes.add(curr);
+        if (layer === 0) {
+            console.log(`layer => ${layer}, for maxMinLayer => ${maxMinLayer}, totalMinutes Before => ${totalMinutes}`);
+            totalMinutes += maxMinLayer;
+            console.log(`totalMinutes After => ${totalMinutes}`);
+            maxMinLayer = 0;
+            for (let i = 0; i < managers.length; i++) {
+                if (layerIndexes.has(managers[i])) queue.push(i);
+            }
+            layerIndexes = new Set([]);
+            layer = queue.length;
+        }
+
+    }
+
+    return totalMinutes;*/
 
 
 
