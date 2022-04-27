@@ -1,3 +1,6 @@
+// 49. Group Anagrams
+// https://leetcode.com/problems/group-anagrams/
+// https://www.udemy.com/course/ultimate-javascript-leetcode-interview-bootcamp/learn/lecture/21384810#questions
 
 const groupAnagrams = (strs) => {
     let grouped = {};
@@ -22,5 +25,3 @@ const strs = ["eat","tea","tan","ate","nat","bat"];   // expected [["bat"],["nat
 /*const strs = ["a"];*/    // expected [["a"]]
 
 console.log(groupAnagrams(strs));
-
-
