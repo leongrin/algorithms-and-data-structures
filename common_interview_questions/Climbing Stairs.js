@@ -4,7 +4,7 @@
 
 
 function climbStairs(n) {
-    if (!n) return null;
+    /*if (!n) return null;
     if (n === 1) return 1;
     if (n === 2) return 2;
 
@@ -17,7 +17,21 @@ function climbStairs(n) {
         i++
     }
 
-    return resArr.pop();
+    return resArr.pop();*/
+
+    function countSteps (stairsRemaining, savedResults) {
+        if (stairsRemaining < 0) return 0;
+
+        if (stairsRemaining === 0) return 1;
+
+        if (savedResults[stairsRemaining]) return savedResults[stairsRemaining];
+
+        savedResults[stairsRemaining] = countSteps(stairsRemaining - 1, savedResults) + countSteps(stairsRemaining - 2, savedResults);
+
+        return savedResults[stairsRemaining];
+    }
+
+    return countSteps(n, {});
 }
 
 
