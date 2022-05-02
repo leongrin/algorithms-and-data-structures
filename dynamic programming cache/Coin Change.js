@@ -4,13 +4,13 @@
 
 const coinChange = (coins, amount) => {
     if (amount === 0) return 0;
-    let dp = Array(amount + 1).fill(Infinity);
+    let dp = Array(amount + 1).fill(Infinity);  // The amount array. Last index is the target amount.
     dp[0] = 0;
 
     for (let i = 1; i < dp.length; i++) {
         for (let j = 0; j < coins.length; j++) {
             let coinsVal = coins[j];
-            if (coinsVal <= i) {
+            if (i - coinsVal >= 0) {
                 dp[i] = Math.min(dp[i - coinsVal] + 1, dp[i]);
             }
         }
