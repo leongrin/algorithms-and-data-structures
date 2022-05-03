@@ -7,7 +7,8 @@ const maxProduct = (nums) => {
     let prevMax = nums[0];
     let prevMin = nums[0];
     let result = nums[0];
-    for (let i=1;i<nums.length;i++) {
+
+    for (let i = 1; i < nums.length; i++) {
         // given the new number, the new maximun can have 3 conditions
         // 1. number(+) * prevMax(+) is the largest
         // 2. number(+) it self is the largest
@@ -22,6 +23,7 @@ const maxProduct = (nums) => {
 
         result = Math.max(currMax, result);
     }
+
     return result;
 };
 
