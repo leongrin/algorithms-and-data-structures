@@ -1,14 +1,21 @@
+// 53. Maximum Subarray
+// https://leetcode.com/problems/maximum-subarray/
+// https://www.udemy.com/course/ultimate-javascript-leetcode-interview-bootcamp/learn/lecture/21372708#questions
 
 const maxSubArray = function(nums) {
 
-    let maxSum = -Infinity
-    let currentSum = 0
-    for(let i = 0; i < nums.length; i++){
-        currentSum = Math.max(nums[i], currentSum + nums[i])
-        maxSum = Math.max(currentSum, maxSum)
+    if (!nums.length) return 0;
+    if (nums.length === 1) return nums[0];
 
+    const dp = [nums[0]];
+    let maxDp = nums[0];
+
+    for (let i = 1; i < nums.length; i++) {
+        dp[i] = Math.max(nums[i], dp[i-1] + nums[i]);
+        maxDp = Math.max(maxDp, dp[i]);
     }
-    return maxSum
+
+    return maxDp;
 
 };
 
