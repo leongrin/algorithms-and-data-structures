@@ -14,7 +14,7 @@ const eraseOverlapIntervals = (intervals) => {
             count++;
             if (intervals[i][1] < end) end = intervals[i][1];
         } else {
-            if (intervals[i][1] > end) end = intervals[i][1];
+            end = intervals[i][1];
         }
     }
 
